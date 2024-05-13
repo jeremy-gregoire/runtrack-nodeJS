@@ -1,6 +1,8 @@
 const fs = require('fs');
 const http = require('http');
 
+let t = '';
+
 const goToPage = (filepath, response) => {
   fs.readFile(filepath, 'utf8', (error, data) => {
     if (error) {
