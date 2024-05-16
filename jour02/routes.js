@@ -50,7 +50,9 @@ function handleRoute(request, response) {
 
       response.setHeader('Content-Type', 'application/json');
       response.writeHead(201);
-      response.end();
+      response.end({
+        status: 'success',
+      });
     });
   } else if (
     request.method === 'PUT' &&
@@ -79,9 +81,38 @@ function handleRoute(request, response) {
 
       response.setHeader('Content-Type', 'application/json');
       response.writeHead(201);
-      response.end();
+      response.end(
+        JSON.stringify({
+          status: 'success',
+        })
+      );
     });
   } else if (request.method === 'DELETE' && URL.pathname === `/tasks/${id}`) {
+    // Experimental - To be test
+    fs.readFile(dataPath, (_, data) => {
+      const parsedData = JSON.parse(data);
+      parsedData.tasks = parsedData.tasks.map((task) => {
+        if (task.id === id) {
+          return;
+        }
+
+        return task;
+      });
+
+      fs.writeFile(dataPath, JSON.stringify(parsedData), (error) => {
+        if (error) {
+          throw error;
+        } else {
+          console.log('data.json updated!');
+        }
+      });
+
+      response.setHeader('Content-Type', 'application/json');
+      response.writeHead(201);
+      response.end({
+        status: 'success',
+      });
+    });
   } else {
     response.writeHead(404);
     response.end();

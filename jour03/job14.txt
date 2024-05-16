@@ -1,0 +1,1 @@
+db.category.findOne({ _id: ObjectId("66448ee089e4b024f4c4235f") })

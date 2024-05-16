@@ -1,0 +1,7 @@
+db.product.updateOne({ name: "chaussure" }, { $set: { category_id: ObjectId("66448ee089e4b024f4c42360") } })
+db.product.updateOne({ name: "Pantalon noir" }, { $set: { category_id: ObjectId("66448ee089e4b024f4c4235f") } })
+db.product.updateOne({ name: "chaussettes" }, { $set: { category_id: ObjectId("66448ee089e4b024f4c42361") } })
+
+db.product.aggregate({$lookup: {from: "category", localField: "category_id", foreignField: "_id", as: "category"}}, {$unwind: "$category"}, {$project: { _id: 1, name: 1, description: 1, price: 1, quantity: 1, category_id: 1, category: "$category" }})
+ou
+db.product.aggregate([{$lookup: {from: "category", localField: "category_id", foreignField: "_id", as: "category"}}, {$unwind: "$category"}, {$project: { _id: 1, name: 1, description: 1, price: 1, quantity: 1, category_id: 1, category: "$category" }}])
