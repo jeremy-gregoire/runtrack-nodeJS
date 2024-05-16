@@ -61,26 +61,3 @@ async function setupData() {
 }
 
 setupData();
-
-Student.aggregate([
-  {
-    $lookup: {
-      from: Year,
-      localField: '_id',
-      foreignField: 'year_id',
-      as: 'year',
-    },
-  },
-  { $unwind: '$year' },
-  {
-    $project: {
-      _id: 1,
-      lastname: 1,
-      firstname: 1,
-      student_number: 1,
-      year: '$year',
-    },
-  },
-])
-  .then((data) => console.log(data))
-  .catch((error) => console.error(error));
