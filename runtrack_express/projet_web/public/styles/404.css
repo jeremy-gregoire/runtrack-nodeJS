@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3em;
+  color: red;
+}
+
+p {
+  font-size: 1.2em;
+  margin-top: 1em;
+}
