@@ -10,16 +10,15 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (_, response) => {
-  response.render('index');
+  response.status(200).render('index');
 });
 
 app.get('/about', (_, response) => {
-  response.render('about');
+  response.status(200).render('about');
 });
 
 app.use((_, response, next) => {
-  response.status(404);
-  response.render('404');
+  response.status(404).render('404');
 });
 
 app.listen(PORT, () => {
