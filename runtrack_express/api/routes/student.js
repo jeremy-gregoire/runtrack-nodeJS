@@ -26,10 +26,10 @@ router.get('/:id', async (request, response) => {
 });
 
 // Deletes a student
-router.delete('/:id', (request, response) => {
+router.delete('/:id', async (request, response) => {
   try {
-    // const id = request.params.id;
-    // const student =
+    const deleteStudent = await Student.deleteOne({ _id: request.params.id });
+    response.status(200).json(deleteStudent);
   } catch (error) {
     response.status(404).json({
       status: response.statusCode,
