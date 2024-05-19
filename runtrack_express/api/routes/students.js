@@ -7,9 +7,29 @@ const Year = require('../models/year');
 // Gets all student
 router.get('/', async (_, response) => {
   try {
-    const students = await Student.find({});
+    const students = await Student.aggregate([
+      {
+        $lookup: {
+          from: 'year',
+          localField: 'year_id',
+          foreignField: '_id',
+          as: 'student_year',
+        },
+      },
+      {
+        $unwind: '$student_year',
+      },
+      {
+        $project: {
+          lastname: 1,
+          firstname: 1,
+          student_number: 1,
+          student_year: '$student_year',
+        },
+      },
+    ]);
 
-    if (students) {
+    if (students && students.length !== 0) {
       response.status(200).json(students);
     } else {
       response.status(200).json({
