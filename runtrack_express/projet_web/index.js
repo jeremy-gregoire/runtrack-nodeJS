@@ -13,6 +13,26 @@ app.get('/', (_, response) => {
   response.status(200).render('index');
 });
 
+app.get('/etudiants', async (request, response) => {
+  try {
+    const studentsRequest = await fetch('http://localhost:3001/etudiants');
+    const students = await studentsRequest.json();
+
+    if (students) {
+      response.status(200).render('students', { students });
+    } else {
+      response.status(204).json({
+        message: 'Students not found !',
+      });
+    }
+  } catch (error) {
+    response.status(404).json({
+      status: response.statusCode,
+      message: error.message,
+    });
+  }
+});
+
 app.get('/about', (_, response) => {
   response.status(200).render('about');
 });

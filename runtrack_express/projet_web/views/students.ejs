@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Runtrack Express - Étudiant</title>
+    <link rel="stylesheet" href="/styles/students.css" />
+  </head>
+  <body>
+    <table class="student-table">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Numéro d'étudiant</th>
+          <th>Année</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% students.forEach((student) => { %>
+        <tr>
+          <td><%= student.lastname %></td>
+          <td><%= student.firstname %></td>
+          <td><%= student.student_number %></td>
+          <td><%= student.student_year.year %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </body>
+</html>
